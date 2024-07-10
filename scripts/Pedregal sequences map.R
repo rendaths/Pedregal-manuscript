@@ -53,6 +53,7 @@
   
   CASOSPED <- dplyr::select(CASOSPED,ident,long,lat,Year,Sequenced)
   CASOSPED <- na.omit(CASOSPED)
+  CASOSPED$ident <- gsub("Caso0","",CASOSPED$ident)
   CASOSPED <- CASOSPED %>%st_as_sf(coords = c("long", "lat"), crs = 4326)
 
 # Pedregal blocks
@@ -93,9 +94,12 @@
       axis.ticks = element_blank(),
       legend.text = element_text(size=14),
       legend.title = element_text(size=16),
-      panel.border = element_rect(color = "black", fill = NA)) +
-  geom_sf(data = CASOSPED, aes( color=Sequenced, shape= Year), size = 2.9,alpha=0.85)+
-    geom_sf_text(data = CASOSPED, aes(label = ident), size = 3, color = "black", check_overlap = TRUE) +
+      panel.border = element_rect(color = "black", fill = NA),
+      panel.grid.major = element_blank(),  # Remove major gridlines
+      panel.grid.minor = element_blank())  + # Remove minor gridlines) 
+  geom_sf(data = CASOSPED, aes( color=Sequenced, shape= Year), size = 4,alpha=0.85)+
+    # add case identifiers
+    geom_sf_text(data = CASOSPED, aes(label = ident), size = 3, color = "black", check_overlap = TRUE, fontface="bold") +
     annotation_scale(location = "br", height = unit(0.4, "cm"),
                      pad_x = unit(1, "cm"),pad_y = unit(0.8, "cm")) +
     annotation_north_arrow(location = "br", which_north = "true", 
