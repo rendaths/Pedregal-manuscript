@@ -27,17 +27,16 @@
   library(cowplot)
   library(tidyverse)
 
-#set working directory
-  setwd("D:/RENZOSSS/RSSS/RABIES MINION/paper draft/databases/codigomapeodecasospedregal")
-# Read data
-  PEDREGAL<-read.csv("PEDREGAL_parcelas.csv")
-  
-  PEDREGALURBAN<-read.csv("PEDREGAL_centro.csv")
-  
-  CASOS2021<-read.csv2("Casos_Rabia_2021_Seq.csv")
-  
-  CASOS2022<-read.csv2("Casos_Rabia_2022_Seq.csv")
 
+# Read data
+  PEDREGAL<-read.csv("raw_data/PEDREGAL_parcelas.csv")
+  
+  PEDREGALURBAN<-read.csv("raw_data/PEDREGAL_centro.csv")
+  
+  CASOS2021<-read.csv2("raw_data/Casos_Rabia_2021_Seq.csv")
+  
+  CASOS2022<-read.csv2("raw_data/Casos_Rabia_2022_Seq.csv")
+  
   
   dim(CASOS2022)
   
@@ -96,7 +95,7 @@
       legend.title = element_text(size=16),
       panel.border = element_rect(color = "black", fill = NA)) +
   geom_sf(data = CASOSPED, aes( color=Sequenced, shape= Year), size = 2.9,alpha=0.85)+
-    
+    geom_sf_text(data = CASOSPED, aes(label = ident), size = 3, color = "black", check_overlap = TRUE) +
     annotation_scale(location = "br", height = unit(0.4, "cm"),
                      pad_x = unit(1, "cm"),pad_y = unit(0.8, "cm")) +
     annotation_north_arrow(location = "br", which_north = "true", 
