@@ -1,0 +1,77 @@
+DATASET_COLORSTRIP
+
+SEPARATOR TAB
+BORDER_WIDTH	0.5
+MARGIN	5
+STRIP_WIDTH	25
+COLOR	#ffffff
+DATASET_LABEL	province
+
+LEGEND_COLORS	#66c2a5	#fc8d62	#8da0cb	#e78ac3
+LEGEND_LABELS	Arequipa	Azangaro	Caylloma	Puno
+LEGEND_SHAPES	1	1	1	1
+LEGEND_TITLE	province
+
+DATA
+#NODE_ID COLOR LABEL_OR_STYLE
+root	#fc8d62	Azangaro
+1101787_meta-illumina	#fc8d62	Azangaro
+n0	#fc8d62	Azangaro
+1101786_meta-illumina	#fc8d62	Azangaro
+n00	#fc8d62	Azangaro
+1203037_meta-illumina	#e78ac3	Puno
+n11	#8da0cb	Caylloma
+n44	#66c2a5	Arequipa
+187_2022_aqp13	#8da0cb	Caylloma
+167_2021_aqp13	#66c2a5	Arequipa
+n2	#8da0cb	Caylloma
+n5	#66c2a5	Arequipa
+196_2021_aqp13	#66c2a5	Arequipa
+71_2021_aqp12	#8da0cb	Caylloma
+n22	#8da0cb	Caylloma
+n33	#8da0cb	Caylloma
+73_2021_aqp12	#8da0cb	Caylloma
+n55	#66c2a5	Arequipa
+n7	#66c2a5	Arequipa
+172_2022_aqp14	#66c2a5	Arequipa
+n3	#8da0cb	Caylloma
+68_2021_aqp12	#8da0cb	Caylloma
+n4	#8da0cb	Caylloma
+52_2021_aqp12	#8da0cb	Caylloma
+34_2021_aqp12	#8da0cb	Caylloma
+147_2021_aqp12	#8da0cb	Caylloma
+18_2021_aqp13	#66c2a5	Arequipa
+n6	#66c2a5	Arequipa
+56_2021_aqp14	#66c2a5	Arequipa
+n77	#66c2a5	Arequipa
+231_2021_aqp14	#66c2a5	Arequipa
+n1111	#66c2a5	Arequipa
+202_2021_aqp12	#8da0cb	Caylloma
+107_2021_aqp12	#8da0cb	Caylloma
+251_2021_aqp12	#8da0cb	Caylloma
+250_2021_aqp12	#8da0cb	Caylloma
+148_2021_aqp13	#66c2a5	Arequipa
+40_2021_aqp14	#66c2a5	Arequipa
+n66	#66c2a5	Arequipa
+n8	#66c2a5	Arequipa
+93_2021_aqp13	#66c2a5	Arequipa
+9_2021_aqp13	#66c2a5	Arequipa
+158_2022_aqp14	#66c2a5	Arequipa
+126_2021_aqp14	#66c2a5	Arequipa
+31_2021_aqp14	#66c2a5	Arequipa
+174_2021_aqp13	#66c2a5	Arequipa
+145_2022_aqp14	#66c2a5	Arequipa
+n88	#66c2a5	Arequipa
+n10	#66c2a5	Arequipa
+12_2021_aqp13	#66c2a5	Arequipa
+90_2021_aqp14	#66c2a5	Arequipa
+236_2022_aqp12	#8da0cb	Caylloma
+n9	#66c2a5	Arequipa
+n1010	#66c2a5	Arequipa
+30_2021_aqp14	#66c2a5	Arequipa
+n99	#66c2a5	Arequipa
+219_2022_aqp14	#66c2a5	Arequipa
+92_2021_aqp13	#66c2a5	Arequipa
+61_2021_aqp14	#66c2a5	Arequipa
+173_2023_aqp14	#66c2a5	Arequipa
+147_2022_aqp14	#66c2a5	Arequipa

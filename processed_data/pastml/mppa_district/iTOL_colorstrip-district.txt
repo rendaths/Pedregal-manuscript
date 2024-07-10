@@ -1,0 +1,77 @@
+DATASET_COLORSTRIP
+
+SEPARATOR TAB
+BORDER_WIDTH	0.5
+MARGIN	5
+STRIP_WIDTH	25
+COLOR	#ffffff
+DATASET_LABEL	district
+
+LEGEND_COLORS	#a6cee3	#1f78b4	#b2df8a	#33a02c	#fb9a99	#e31a1c	#fdbf6f	#ff7f00	#cab2d6	#6a3d9a
+LEGEND_LABELS	Atuncolla	Caminaca	Cayma	Cercado	Cerro Colorado	Characato	Jacobo Hunter	Majes	Paucarpata	Yura
+LEGEND_SHAPES	1	1	1	1	1	1	1	1	1	1
+LEGEND_TITLE	district
+
+DATA
+#NODE_ID COLOR LABEL_OR_STYLE
+root	#1f78b4	Caminaca
+1101787_meta-illumina	#1f78b4	Caminaca
+n0	#1f78b4	Caminaca
+1101786_meta-illumina	#1f78b4	Caminaca
+n00	#1f78b4	Caminaca
+1203037_meta-illumina	#a6cee3	Atuncolla
+n11	#ff7f00	Majes
+n44	#6a3d9a	Yura
+187_2022_aqp13	#ff7f00	Majes
+167_2021_aqp13	#cab2d6	Paucarpata
+n2	#ff7f00	Majes
+n5	#6a3d9a	Yura
+196_2021_aqp13	#fb9a99	Cerro Colorado
+71_2021_aqp12	#ff7f00	Majes
+n22	#ff7f00	Majes
+n33	#ff7f00	Majes
+73_2021_aqp12	#ff7f00	Majes
+n55	#6a3d9a	Yura
+n7	#6a3d9a	Yura
+172_2022_aqp14	#b2df8a	Cayma
+n3	#ff7f00	Majes
+68_2021_aqp12	#ff7f00	Majes
+n4	#ff7f00	Majes
+52_2021_aqp12	#ff7f00	Majes
+34_2021_aqp12	#ff7f00	Majes
+147_2021_aqp12	#ff7f00	Majes
+18_2021_aqp13	#b2df8a	Cayma
+n6	#fb9a99	Cerro Colorado
+56_2021_aqp14	#6a3d9a	Yura
+n77	#6a3d9a	Yura
+231_2021_aqp14	#fb9a99	Cerro Colorado
+n1111	#fb9a99	Cerro Colorado
+202_2021_aqp12	#ff7f00	Majes
+107_2021_aqp12	#ff7f00	Majes
+251_2021_aqp12	#ff7f00	Majes
+250_2021_aqp12	#ff7f00	Majes
+148_2021_aqp13	#fb9a99	Cerro Colorado
+40_2021_aqp14	#fb9a99	Cerro Colorado
+n66	#fb9a99	Cerro Colorado
+n8	#6a3d9a	Yura
+93_2021_aqp13	#33a02c	Cercado
+9_2021_aqp13	#fb9a99	Cerro Colorado
+158_2022_aqp14	#fdbf6f	Jacobo Hunter
+126_2021_aqp14	#fb9a99	Cerro Colorado
+31_2021_aqp14	#fb9a99	Cerro Colorado
+174_2021_aqp13	#fb9a99	Cerro Colorado
+145_2022_aqp14	#fb9a99	Cerro Colorado
+n88	#6a3d9a	Yura
+n10	#6a3d9a	Yura
+12_2021_aqp13	#6a3d9a	Yura
+90_2021_aqp14	#6a3d9a	Yura
+236_2022_aqp12	#ff7f00	Majes
+n9	#6a3d9a	Yura
+n1010	#fb9a99	Cerro Colorado
+30_2021_aqp14	#6a3d9a	Yura
+n99	#6a3d9a	Yura
+219_2022_aqp14	#e31a1c	Characato
+92_2021_aqp13	#fb9a99	Cerro Colorado
+61_2021_aqp14	#fb9a99	Cerro Colorado
+173_2023_aqp14	#fdbf6f	Jacobo Hunter
+147_2022_aqp14	#6a3d9a	Yura

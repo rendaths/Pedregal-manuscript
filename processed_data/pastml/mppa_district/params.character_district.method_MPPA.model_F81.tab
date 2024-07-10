@@ -1,0 +1,28 @@
+parameter	value
+pastml_version	1.9.43
+character	district
+log_likelihood	-57.2852434991444
+log_likelihood_restricted_JOINT	-59.00030655553938
+log_likelihood_restricted_MAP	-59.00030655553938
+log_likelihood_restricted_MPPA	-57.96107735248742
+num_scenarios	6
+num_states_per_node_avg	1.0806451612903225
+num_unresolved_nodes	1
+percentage_of_unresolved_nodes	1.6129032258064515
+method	MPPA
+model	F81
+num_nodes	62
+num_tips	38
+scaling_factor	0.8576589978053384
+state_changes_per_avg_branch	0.8042390680798391
+smoothing_factor	0
+Atuncolla	0.04984614189739434
+Caminaca	0.059856589878783346
+Cayma	0.099662416135339
+Cercado	0.04984611724920406
+Cerro Colorado	0.3043364133674612
+Characato	0.049846110152047325
+Jacobo Hunter	0.0996972147360404
+Majes	0.14783535193524577
+Paucarpata	0.04984618565446513
+Yura	0.08922745899401953

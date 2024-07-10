@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  font-family: helvetica,serif;
+  font-size: 14px;
+}
+
+#cy {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  background-color: #FFFFFF;
+}
+
+h1 {
+  opacity: 0.5;
+  font-size: 1em;
+}
+
+.floating {
+    max-width: 30%;
+    width: 120px;
+    float: right;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.cy-button {
+    background-color: #555555;
+    border: none;
+    color: white;
+    padding: 6px 0px;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+}
+
+a.cy-button:link, a.cy-button:visited, a.cy-button:hover {
+    color: white;
+    text-decoration: none;
+}
+
+
+.slidertext {
+    width: 100%;
+    color: #555555;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    text-align: center;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    margin: 10px 0px;
+    display: inline-block;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #555555;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #555555;
+    cursor: pointer;
+}
+
+@media all and (max-width: 600px) {
+    .buttontext {
+        display: none;
+    }
+}
+
+
+</style>
+<meta charset=utf-8 />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+<title>HTML_compressed_mppa_province</title>
+    
+    <script  type='text/javascript' src="https://pastml.pasteur.fr/static/js/jquery.min.js"></script>
+    
+    <script  type='text/javascript' src="https://pastml.pasteur.fr/static/js/jquery.qtip.min.js"></script>
+    
+    <script  type='text/javascript' src="https://pastml.pasteur.fr/static/js/cytoscape.min.js"></script>
+    
+    <script  type='text/javascript' src="https://pastml.pasteur.fr/static/js/cytoscape-qtip.js"></script>
+    
+    <script  type='text/javascript' src="https://pastml.pasteur.fr/static/js/cytoscape-svg.js"></script>
+    
+    <script  type='text/javascript' src="https://pastml.pasteur.fr/static/js/layout-base.min.js"></script>
+    
+    <script  type='text/javascript' src="https://pastml.pasteur.fr/static/js/cose-base.min.js"></script>
+    
+    <script  type='text/javascript' src="https://pastml.pasteur.fr/static/js/cytoscape-cose-bilkent.min.js"></script>
+    
+    
+    <link rel="stylesheet" type="text/css" href="https://pastml.pasteur.fr/static/css/jquery.qtip.min.css"/>
+    
+    <link rel="stylesheet" type="text/css" href="https://pastml.pasteur.fr/static/css/bootstrap.min.css"/>
+    
+<meta http-Equiv="Cache-Control" Content="no-cache" />
+<meta http-Equiv="Pragma" Content="no-cache" />
+<meta http-Equiv="Expires" Content="0" />
+</head>
+<body>
+<div id="fullscreenDiv">
+<div id="cy"></div>
+<div class="floating">
+    <a class="cy-button" href="#" id="fit" onclick="fit()">
+        <span class="glyphicon glyphicon-resize-full"></span><span class="buttontext">  Fit screen</span>
+    </a>
+    <a class="cy-button" href="#" id="reset" onclick="resetLayout()">
+        <span class="glyphicon glyphicon-picture"></span><span class="buttontext">  Restore layout</span>
+    </a>
+    <a class="cy-button" href="#" id="downloader" onclick="toImage()" download="HTML_compressed_mppa_province.jpg">
+        <span class="glyphicon glyphicon-save"></span><span class="buttontext">  Save (jpg)</span>
+    </a>
+    <a class="cy-button" href="#" id="downloader_svg" onclick="saveAsSvg()" download="HTML_compressed_mppa_province.svg">
+        <span class="glyphicon glyphicon-save"></span><span class="buttontext">  Save (svg)</span>
+    </a>
+    <a class="cy-button" href="#" id="fullscreen" onclick="toggleFullScreen()">
+        <span id="fsspan" class="glyphicon glyphicon-fullscreen"></span><span id="fstext" class="buttontext">  Full screen</span>
+    </a>
+    
+<div class="slidecontainer">
+  <input type="range" min="0" max="8" value="8" class="slider" id="myRange" step="1">
+  <div class="slidertext">date: <span id="demo"></span></div>
+</div>
+</div></div>
+<!-- Load appplication code at the end to ensure DOM is loaded -->
+<script type="text/javascript">var layoutOptions = {
+  name: 'preset',
+  positions: function(node){
+    node.position('x', node.data('node_x'));
+    node.position('y', node.data('node_y'));
+    return node.position();
+  },
+  fit: true, // whether to fit to viewport
+  padding: 1, // padding on fit
+};
+
+var cy = cytoscape({
+  container: document.getElementById('cy'),
+
+  style: cytoscape.stylesheet()
+    .selector('node')
+      .css({
+        'width': 300,
+        'height': 300,
+        'content': '',
+        'shape': 'ellipse',
+        'pie-size': '100%',
+        'background-color': '#909090',
+        'color': '#383838',
+        'text-opacity': 1,
+        'text-valign': 'center',
+        'text-halign': 'center',
+        'font-size': 80,
+        'text-halign' : 'center',
+        'text-valign' : 'center',
+        'min-zoomed-font-size': 12,
+        'text-background-color' : '#ffffff',
+        'text-background-shape' : 'roundrectangle',
+        'text-background-opacity': .3,
+        'text-background-padding' : 1,
+      })
+    .selector('node[node_name]')
+      .css({
+        'content': 'data(node_name)',
+      })
+    .selector('node[tip]')
+      .css({
+        'width': 400,
+        'height': 400,
+        'font-size': 100,
+      })
+    .selector('node[unresolved]')
+      .css({
+        'shape': 'octagon',
+        'pie-size': '92%',
+        'width': 500,
+        'height': 500,
+        'font-size': 125,
+      })
+    .selector('node[node_size]')
+      .css({
+        'width': 'data(node_size)',
+        'height': 'data(node_size)',
+      })
+    .selector('node[node_fontsize]')
+      .css({
+        'font-size': 'data(node_fontsize)',
+      })
+    
+    .selector(".Arequipa")
+        .css({
+        
+                'pie-1-background-color': "#66c2a5",
+                'pie-1-background-size': '100.0\%',
+            
+        })
+    
+    .selector(".Arequipa-Azangaro-Caylloma")
+        .css({
+        
+                'pie-1-background-color': "#66c2a5",
+                'pie-1-background-size': '33.33\%',
+            
+                'pie-2-background-color': "#fc8d62",
+                'pie-2-background-size': '33.33\%',
+            
+                'pie-3-background-color': "#8da0cb",
+                'pie-3-background-size': '33.33\%',
+            
+        })
+    
+    .selector(".Azangaro")
+        .css({
+        
+                'pie-1-background-color': "#fc8d62",
+                'pie-1-background-size': '100.0\%',
+            
+        })
+    
+    .selector(".Caylloma")
+        .css({
+        
+                'pie-1-background-color': "#8da0cb",
+                'pie-1-background-size': '100.0\%',
+            
+        })
+    
+    .selector(".Puno")
+        .css({
+        
+                'pie-1-background-color': "#e78ac3",
+                'pie-1-background-size': '100.0\%',
+            
+        })
+    
+    .selector('edge')
+      .css({
+        'width': 50,
+        'font-size': 80,
+        'color': 'black',
+        'content': '',
+        'curve-style': 'bezier',
+        'target-arrow-shape': 'triangle',
+        'target-arrow-color': '#909090',
+        'opacity': 0.8,
+        'text-opacity': 1,
+        'line-color': '#909090',
+        'line-style': 'solid',
+        'text-background-color' : '#ffffff',
+        'text-background-shape' : 'roundrectangle',
+        'text-background-opacity': 1,
+        'text-background-padding' : 4,
+        'min-zoomed-font-size': 10,
+        'line-dash-pattern': [100, 10],
+      })
+    .selector('edge[polytomy]')
+      .css({
+        'line-style': 'dashed',
+      })
+    .selector('edge[edge_name>1]')
+      .css({
+        'line-color': '#383838',
+        'target-arrow-color': '#383838',
+        'content': 'data(edge_name)',
+      })
+    .selector('edge[edge_size]')
+      .css({
+        'width': 'data(edge_size)',
+        'font-size': 'data(edge_size)',
+      })
+    .selector(':selected')
+      .css({
+        'background-color': 'black',
+        'line-color': 'black',
+        'target-arrow-color': 'black',
+        'source-arrow-color': 'black',
+        'pie-size': '60%',
+        'opacity': 1
+      })
+    .selector('.faded')
+      .css({
+        'opacity': 0.25,
+        'text-opacity': 0
+      }),
+
+  elements: {'nodes': [{'data': {'node_name_1': 'Azangaro 2', 'node_in_tips': ' 2', 'node_in_tips_6': ' 2', 'node_roots_6': 'root', 'node_roots_2': 'root', 'node_in_tips_5': ' 2', 'node_fontsize_7': 97, 'node_all_tips_6': ' 30', 'node_roots_3': 'root', 'node_fontsize': 97, 'node_root_dates_6': '30 May 2010', 'node_all_tips_1': ' 5', 'node_root_dates_0': '30 May 2010', 'node_size': 357, 'node_fontsize_0': 80, 'node_root_id': 'root', 'node_in_ns_1': ' 3', 'node_in_ns': ' 3', 'node_size_4': 357, 'node_all_tips_7': ' 34', 'node_name_8': 'Azangaro 2', 'node_in_ns_3': ' 3', 'node_root_dates_7': '30 May 2010', 'node_root_date': '30 May 2010 (21 Jun 2009-28 Dec 2010)', 'node_all_tips_0': ' 1', 'node_all_tips_2': ' 10', 'node_size_0': 200, 'node_name_4': 'Azangaro 2', 'node_in_ns_6': ' 3', 'node_in_ns_5': ' 3', 'node_roots_1': 'root', 'node_all_tips': ' 38', 'node_in_tips_4': ' 2', 'node_root_dates_3': '30 May 2010', 'node_roots_8': 'root', 'node_in_tips_2': ' 2', 'mile': 0, 'node_roots_4': 'root', 'node_size_2': 357, 'node_name_6': 'Azangaro 2', 'node_name_7': 'Azangaro 2', 'node_roots_0': 'root', 'node_in_tips_3': ' 2', 'node_fontsize_3': 97, 'node_in_tips_8': ' 2', 'node_roots_5': 'root', 'node_size_1': 357, 'node_all_tips_5': ' 24', 'node_in_ns_4': ' 3', 'node_root_dates_5': '30 May 2010', 'node_in_tips_0': ' 1', 'node_root_dates_1': '30 May 2010', 'node_name_2': 'Azangaro 2', 'node_all_tips_3': ' 16', 'node_name': 'Azangaro 2', 'node_all_tips_4': ' 20', 'node_root_dates_4': '30 May 2010', 'node_fontsize_4': 97, 'node_in_tips_1': ' 2', 'node_in_ns_0': ' 1', 'node_in_ns_8': ' 3', 'node_name_3': 'Azangaro 2', 'node_in_ns_7': ' 3', 'node_fontsize_5': 97, 'node_root_dates': '30 May 2010 (21 Jun 2009-28 Dec 2010)', 'node_size_8': 357, 'node_size_5': 357, 'node_size_7': 357, 'node_root_dates_8': '30 May 2010', 'node_size_3': 357, 'node_all_tips_8': ' 38', 'node_fontsize_1': 97, 'node_size_6': 357, 'node_roots_7': 'root', 'node_fontsize_8': 97, 'node_in_tips_7': ' 2', 'node_name_5': 'Azangaro 2', 'node_in_ns_2': ' 3', 'node_fontsize_6': 97, 'node_root_dates_2': '30 May 2010', 'node_fontsize_2': 97, 'node_roots': 'root', 'node_name_0': 'Azangaro 1', 'id': 0, 'tooltip': 'province: Azangaro', 'node_x': 2171.5, 'node_y': 0}, 'classes': 'Azangaro'}, {'data': {'node_name_1': ' 0', 'node_in_tips': ' 0', 'node_in_tips_6': ' 0', 'node_roots_6': 'n1', 'node_roots_2': 'n1', 'node_in_tips_5': ' 0', 'node_fontsize_7': 80, 'node_all_tips_6': ' 27', 'node_roots_3': 'n1', 'node_fontsize': 80, 'node_root_dates_6': '05 Apr 2013', 'node_all_tips_1': ' 2', 'node_size': 133, 'node_root_id': 'n1', 'node_in_ns_1': ' 1', 'node_in_ns': ' 1', 'node_size_4': 133, 'node_all_tips_7': ' 31', 'node_name_8': ' 0', 'node_in_ns_3': ' 1', 'node_root_dates_7': '05 Apr 2013', 'node_root_date': '05 Apr 2013 (06 Jul 2011-19 Jan 2015)', 'node_all_tips_2': ' 7', 'node_name_4': ' 0', 'node_in_ns_6': ' 1', 'node_in_ns_5': ' 1', 'node_roots_1': 'n1', 'node_all_tips': ' 35', 'node_in_tips_4': ' 0', 'node_root_dates_3': '05 Apr 2013', 'node_roots_8': 'n1', 'node_in_tips_2': ' 0', 'mile': 1, 'node_roots_4': 'n1', 'node_size_2': 133, 'node_name_6': ' 0', 'node_name_7': ' 0', 'node_in_tips_3': ' 0', 'node_fontsize_3': 80, 'node_in_tips_8': ' 0', 'node_roots_5': 'n1', 'node_size_1': 133, 'node_all_tips_5': ' 21', 'node_in_ns_4': ' 1', 'node_root_dates_5': '05 Apr 2013', 'node_root_dates_1': '05 Apr 2013', 'node_name_2': ' 0', 'node_all_tips_3': ' 13', 'node_name': ' 0', 'node_all_tips_4': ' 17', 'node_root_dates_4': '05 Apr 2013', 'node_fontsize_4': 80, 'node_in_tips_1': ' 0', 'node_in_ns_8': ' 1', 'node_name_3': ' 0', 'node_in_ns_7': ' 1', 'node_fontsize_5': 80, 'node_root_dates': '05 Apr 2013 (06 Jul 2011-19 Jan 2015)', 'node_size_8': 133, 'node_size_5': 133, 'node_size_7': 133, 'node_root_dates_8': '05 Apr 2013', 'node_size_3': 133, 'node_all_tips_8': ' 35', 'node_fontsize_1': 80, 'node_size_6': 133, 'node_roots_7': 'n1', 'node_fontsize_8': 80, 'node_in_tips_7': ' 0', 'node_name_5': ' 0', 'node_in_ns_2': ' 1', 'node_fontsize_6': 80, 'node_root_dates_2': '05 Apr 2013', 'node_fontsize_2': 80, 'node_roots': 'n1', 'id': 1, 'tooltip': 'province: Arequipa or Azangaro or Caylloma', 'node_x': 1033.0, 'node_y': 511.0}, 'classes': 'Arequipa-Azangaro-Caylloma'}, {'data': {'node_name_1': 'Puno 1', 'node_in_tips': ' 1', 'node_in_tips_6': ' 1', 'node_roots_6': '1203037_meta-illumina', 'node_roots_2': '1203037_meta-illumina', 'node_in_tips_5': ' 1', 'node_fontsize_7': 80, 'node_all_tips_6': ' 1', 'node_roots_3': '1203037_meta-illumina', 'node_fontsize': 80, 'node_root_dates_6': '08 May 2012', 'node_all_tips_1': ' 1', 'node_size': 200, 'node_root_id': '1203037_meta-illumina', 'node_in_ns_1': ' 0', 'node_in_ns': ' 0', 'node_size_4': 200, 'node_all_tips_7': ' 1', 'node_name_8': 'Puno 1', 'node_in_ns_3': ' 0', 'node_root_dates_7': '08 May 2012', 'node_root_date': '08 May 2012', 'node_all_tips_2': ' 1', 'node_name_4': 'Puno 1', 'node_in_ns_6': ' 0', 'node_in_ns_5': ' 0', 'node_roots_1': '1203037_meta-illumina', 'node_all_tips': ' 1', 'node_in_tips_4': ' 1', 'node_root_dates_3': '08 May 2012', 'node_roots_8': '1203037_meta-illumina', 'node_in_tips_2': ' 1', 'mile': 1, 'node_roots_4': '1203037_meta-illumina', 'node_size_2': 200, 'node_name_6': 'Puno 1', 'node_name_7': 'Puno 1', 'node_in_tips_3': ' 1', 'node_fontsize_3': 80, 'node_in_tips_8': ' 1', 'node_roots_5': '1203037_meta-illumina', 'node_size_1': 200, 'node_all_tips_5': ' 1', 'node_in_ns_4': ' 0', 'node_root_dates_5': '08 May 2012', 'node_root_dates_1': '08 May 2012', 'node_name_2': 'Puno 1', 'node_all_tips_3': ' 1', 'node_name': 'Puno 1', 'node_all_tips_4': ' 1', 'node_root_dates_4': '08 May 2012', 'node_fontsize_4': 80, 'node_in_tips_1': ' 1', 'node_in_ns_8': ' 0', 'node_name_3': 'Puno 1', 'node_in_ns_7': ' 0', 'node_fontsize_5': 80, 'node_root_dates': '08 May 2012', 'node_size_8': 200, 'node_size_5': 200, 'node_size_7': 200, 'node_root_dates_8': '08 May 2012', 'node_size_3': 200, 'node_all_tips_8': ' 1', 'node_fontsize_1': 80, 'node_size_6': 200, 'node_roots_7': '1203037_meta-illumina', 'node_fontsize_8': 80, 'node_in_tips_7': ' 1', 'node_name_5': 'Puno 1', 'node_in_ns_2': ' 0', 'node_fontsize_6': 80, 'node_root_dates_2': '08 May 2012', 'node_fontsize_2': 80, 'node_roots': '1203037_meta-illumina', 'id': 2, 'tip': 1, 'tooltip': 'province: Puno', 'node_x': 3310.0, 'node_y': 544.5}, 'classes': 'Puno'}, {'data': {'node_name_1': 'Arequipa 2', 'node_in_tips': ' 22', 'node_in_tips_6': ' 16', 'node_roots_6': 'n44', 'node_roots_2': 'n44', 'node_in_tips_5': ' 13', 'node_fontsize_7': 230, 'node_all_tips_6': ' 16', 'node_roots_3': 'n44', 'node_fontsize': 240, 'node_root_dates_6': '13 Jun 2020', 'node_all_tips_1': ' 2', 'node_size': 1600, 'node_root_id': 'n44', 'node_in_ns_1': ' 6', 'node_in_ns': ' 14', 'node_size_4': 1078, 'node_all_tips_7': ' 20', 'node_name_8': 'Arequipa 22', 'node_in_ns_3': ' 10', 'node_root_dates_7': '13 Jun 2020', 'node_root_date': '13 Jun 2020 (24 Dec 2019-27 Sep 2020)', 'node_all_tips_2': ' 6', 'node_name_4': 'Arequipa 11', 'node_in_ns_6': ' 12', 'node_in_ns_5': ' 11', 'node_roots_1': 'n44', 'node_all_tips': ' 23', 'node_in_tips_4': ' 11', 'node_root_dates_3': '13 Jun 2020', 'node_roots_8': 'n44', 'node_in_tips_2': ' 6', 'mile': 1, 'node_roots_4': 'n44', 'node_size_2': 749, 'node_name_6': 'Arequipa 16', 'node_name_7': 'Arequipa 20', 'node_in_tips_3': ' 8', 'node_fontsize_3': 159, 'node_in_tips_8': ' 22', 'node_roots_5': 'n44', 'node_size_1': 357, 'node_all_tips_5': ' 13', 'node_in_ns_4': ' 11', 'node_root_dates_5': '13 Jun 2020', 'node_root_dates_1': '13 Jun 2020', 'node_name_2': 'Arequipa 6', 'node_all_tips_3': ' 8', 'node_name': 'Arequipa 22', 'node_all_tips_4': ' 11', 'node_root_dates_4': '13 Jun 2020', 'node_fontsize_4': 180, 'node_in_tips_1': ' 2', 'node_in_ns_8': ' 14', 'node_name_3': 'Arequipa 8', 'node_in_ns_7': ' 14', 'node_fontsize_5': 192, 'node_root_dates': '13 Jun 2020 (24 Dec 2019-27 Sep 2020)', 'node_size_8': 1600, 'node_size_5': 1188, 'node_size_7': 1517, 'node_root_dates_8': '13 Jun 2020', 'node_size_3': 893, 'node_all_tips_8': ' 23', 'node_fontsize_1': 97, 'node_size_6': 1338, 'node_roots_7': 'n44', 'node_fontsize_8': 240, 'node_in_tips_7': ' 20', 'node_name_5': 'Arequipa 13', 'node_in_ns_2': ' 9', 'node_fontsize_6': 210, 'node_root_dates_2': '13 Jun 2020', 'node_fontsize_2': 142, 'node_roots': 'n44', 'id': 3, 'tooltip': 'province: Arequipa', 'node_x': 100.0, 'node_y': 1643.5}, 'classes': 'Arequipa'}, {'data': {'node_in_tips': ' 11', 'node_in_tips_6': ' 10', 'node_roots_6': 'n11', 'node_roots_2': 'n11', 'node_in_tips_5': ' 7', 'node_fontsize_7': 173, 'node_all_tips_6': ' 11', 'node_roots_3': 'n11', 'node_fontsize': 180, 'node_root_dates_6': '05 Oct 2020', 'node_size': 1078, 'node_root_id': 'n11', 'node_in_ns': ' 6', 'node_size_4': 749, 'node_all_tips_7': ' 11', 'node_name_8': 'Caylloma 11', 'node_in_ns_3': ' 4', 'node_root_dates_7': '05 Oct 2020', 'node_root_date': '05 Oct 2020 (19 Apr 2020-30 Jan 2021)', 'node_all_tips_2': ' 1', 'node_name_4': 'Caylloma 6', 'node_in_ns_6': ' 6', 'node_in_ns_5': ' 5', 'node_all_tips': ' 12', 'node_in_tips_4': ' 6', 'node_root_dates_3': '05 Oct 2020', 'node_roots_8': 'n11', 'node_in_tips_2': ' 1', 'mile': 2, 'node_roots_4': 'n11', 'node_size_2': 200, 'node_name_6': 'Caylloma 10', 'node_name_7': 'Caylloma 10', 'node_in_tips_3': ' 5', 'node_fontsize_3': 133, 'node_in_tips_8': ' 11', 'node_roots_5': 'n11', 'node_all_tips_5': ' 8', 'node_in_ns_4': ' 5', 'node_root_dates_5': '05 Oct 2020', 'node_name_2': 'Caylloma 1', 'node_all_tips_3': ' 5', 'node_name': 'Caylloma 11', 'node_all_tips_4': ' 6', 'node_root_dates_4': '05 Oct 2020', 'node_fontsize_4': 142, 'node_in_ns_8': ' 6', 'node_name_3': 'Caylloma 5', 'node_in_ns_7': ' 6', 'node_fontsize_5': 151, 'node_root_dates': '05 Oct 2020 (19 Apr 2020-30 Jan 2021)', 'node_size_8': 1078, 'node_size_5': 824, 'node_size_7': 1020, 'node_root_dates_8': '05 Oct 2020', 'node_size_3': 668, 'node_all_tips_8': ' 12', 'node_size_6': 1020, 'node_roots_7': 'n11', 'node_fontsize_8': 180, 'node_in_tips_7': ' 10', 'node_name_5': 'Caylloma 7', 'node_in_ns_2': ' 3', 'node_fontsize_6': 173, 'node_root_dates_2': '05 Oct 2020', 'node_fontsize_2': 80, 'node_roots': 'n11', 'id': 4, 'tooltip': 'province: Caylloma', 'node_x': 1966.0, 'node_y': 1382.5}, 'classes': 'Caylloma'}, {'data': {'node_name_8': 'Caylloma 1', 'node_in_tips': ' 1', 'node_in_ns_8': ' 0', 'node_root_date': '06 Sep 2022', 'node_root_dates': '06 Sep 2022', 'node_in_tips_8': ' 1', 'node_fontsize': 80, 'node_size_8': 200, 'node_root_dates_8': '06 Sep 2022', 'node_all_tips_8': ' 1', 'node_size': 200, 'node_root_id': '236_2022_aqp12', 'node_fontsize_8': 80, 'node_all_tips': ' 1', 'node_roots_8': '236_2022_aqp12', 'node_in_ns': ' 0', 'mile': 8, 'node_roots': '236_2022_aqp12', 'node_name': 'Caylloma 1', 'id': 5, 'tip': 1, 'tooltip': 'province: Caylloma', 'node_x': 100.0, 'node_y': 2809.5}, 'classes': 'Caylloma'}, {'data': {'node_name_8': 'Arequipa 1', 'node_in_tips': ' 1', 'node_in_tips_6': ' 1', 'node_in_ns_8': ' 0', 'node_roots_6': '167_2021_aqp13', 'node_in_ns_7': ' 0', 'node_in_tips_5': ' 1', 'node_fontsize_7': 80, 'node_root_dates_7': '05 May 2021', 'node_fontsize_5': 80, 'node_root_date': '05 May 2021', 'node_all_tips_6': ' 1', 'node_root_dates': '05 May 2021', 'node_in_tips_8': ' 1', 'node_roots_5': '167_2021_aqp13', 'node_fontsize': 80, 'node_size_8': 200, 'node_size_5': 200, 'node_size_7': 200, 'node_root_dates_8': '05 May 2021', 'node_all_tips_5': ' 1', 'node_all_tips_8': ' 1', 'node_root_dates_6': '05 May 2021', 'node_size': 200, 'node_size_6': 200, 'node_in_ns_6': ' 0', 'node_in_ns_5': ' 0', 'node_root_id': '167_2021_aqp13', 'node_roots_7': '167_2021_aqp13', 'node_root_dates_5': '05 May 2021', 'node_fontsize_8': 80, 'node_all_tips': ' 1', 'node_in_tips_7': ' 1', 'node_roots_8': '167_2021_aqp13', 'node_name_5': 'Arequipa 1', 'node_in_ns': ' 0', 'mile': 5, 'node_fontsize_6': 80, 'node_roots': '167_2021_aqp13', 'node_name_6': 'Arequipa 1', 'node_name_7': 'Arequipa 1', 'node_name': 'Arequipa 1', 'node_all_tips_7': ' 1', 'id': 6, 'tip': 1, 'tooltip': 'province: Arequipa', 'node_x': 1966.0, 'node_y': 2287.5}, 'classes': 'Arequipa'}], 'edges': [{'data': {'source': 0, 'target': 1, 'edge_name_7': '', 'edge_size_4': 50, 'edge_name_4': '', 'edge_name_1': '', 'edge_size_1': 50, 'edge_size_7': 50, 'edge_size_6': 50, 'edge_name_5': '', 'mile': 1, 'edge_size_2': 50, 'edge_size_8': 50, 'edge_name': '', 'edge_size_3': 50, 'edge_size': 50, 'edge_size_5': 50, 'edge_name_3': '', 'edge_name_6': '', 'edge_name_8': '', 'edge_name_2': ''}}, {'data': {'source': 0, 'target': 2, 'edge_name_7': '', 'edge_size_4': 50, 'edge_name_4': '', 'edge_name_1': '', 'edge_size_1': 50, 'edge_size_7': 50, 'edge_size_6': 50, 'edge_name_5': '', 'mile': 1, 'edge_size_2': 50, 'edge_size_8': 50, 'edge_name': '', 'edge_size_3': 50, 'edge_size': 50, 'edge_size_5': 50, 'edge_name_3': '', 'edge_name_6': '', 'edge_name_8': '', 'edge_name_2': ''}}, {'data': {'source': 1, 'target': 3, 'edge_name_7': '', 'edge_size_4': 50, 'edge_name_4': '', 'edge_name_1': '', 'edge_size_1': 50, 'edge_size_7': 50, 'edge_size_6': 50, 'edge_name_5': '', 'mile': 1, 'edge_size_2': 50, 'edge_size_8': 50, 'edge_name': '', 'edge_size_3': 50, 'edge_size': 50, 'edge_size_5': 50, 'edge_name_3': '', 'edge_name_6': '', 'edge_name_8': '', 'edge_name_2': ''}}, {'data': {'source': 1, 'target': 4, 'edge_name_7': '', 'edge_size_4': 50, 'edge_name_4': '', 'edge_size_7': 50, 'edge_size_6': 50, 'edge_name_5': '', 'mile': 2, 'edge_size_2': 50, 'edge_size_8': 50, 'edge_name': '', 'edge_size_3': 50, 'edge_size': 50, 'edge_size_5': 50, 'edge_name_3': '', 'edge_name_6': '', 'edge_name_8': '', 'edge_name_2': ''}}, {'data': {'source': 3, 'target': 5, 'edge_name': '', 'edge_size': 50, 'edge_size_8': 50, 'mile': 8, 'edge_name_8': ''}}, {'data': {'source': 4, 'target': 6, 'edge_name': '', 'edge_name_7': '', 'edge_size_7': 50, 'edge_size_6': 50, 'edge_name_5': '', 'edge_size': 50, 'edge_size_5': 50, 'edge_size_8': 50, 'mile': 5, 'edge_name_6': '', 'edge_name_8': ''}}]},
+
+  layout: layoutOptions,
+
+  ready: function(){
+    window.cy = this;
+  }
+});
+
+function addQtips() {
+    cy.filter(function(ele, i, eles) {
+        return ele.isNode() && ele.data('tooltip') !== undefined;
+    } ).qtip({
+        content: function(){
+                var tooltip = '<br><div style="overflow: auto;"><span style="white-space:nowrap;">' + this.data('tooltip') + '</span></div>';
+                if (this.data('node_meta') !== undefined) {
+                    tooltip += '<br><div style="overflow: auto;"><span style="white-space:nowrap;">ids: ' + this.data('node_roots') + '</span></div>';
+                    tooltip += '<br><div style="overflow: auto;"><span style="white-space:nowrap;">date: ' + this.data('node_root_dates') + '</span></div>';
+                } else {
+                    tooltip += '<br>id: ' + this.data('node_roots') + '<br>';
+                    tooltip += '<br>date: ' + this.data('node_root_dates') + '<br>';
+                }
+                tooltip += '<br>samples inside: ' + this.data('node_in_tips');
+                tooltip += '<br>total samples in the subtree (inc. trimmed): ' + this.data('node_all_tips');
+                tooltip += '<br>diversification events inside: ' + this.data('node_in_ns');
+                return tooltip;
+            },
+        show: {event: 'mouseover'},
+        hide: {event: 'mouseout'},
+        style: {classes: 'qtip-bootstrap'},
+        position: {at: 'center bottom'}
+    });
+}
+
+cy.minZoom(.001);
+cy.maxZoom(20);
+addQtips();
+
+
+function toImage(){
+    document.getElementById("downloader").href = cy.jpg({ full: false, quality: 1.0, scale: 2}).replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+}
+
+function saveAsSvg() {
+    var svgContent = cy.svg({scale: 1, full: true});
+    var blob = new Blob([svgContent], {type:"image/svg+xml;charset=utf-8"});
+    document.getElementById("downloader_svg").href = URL.createObjectURL(blob);
+}
+
+function fit() {
+    cy.fit();
+}
+
+function resetLayout() {
+    cy.startBatch();
+    cy.layout(layoutOptions).run();
+    if (removed !== undefined) {
+        removed.forEach(function( ele ) {
+            if (ele.data('node_x') !== undefined) {
+                ele.position('x', ele.data('node_x'));
+                ele.position('y', ele.data('node_y'));
+            }
+        });
+    }
+    cy.endBatch();
+}
+
+var years = ['04 Mar 2011', '19 Jan 2021', '13 Feb 2021', '07 Mar 2021', '18 Mar 2021', '05 May 2021', '11 Aug 2021', '09 Jul 2022', '16 Oct 2022'];
+var slider = document.getElementById("myRange");
+if (slider !== null) {
+    var output = document.getElementById("demo");
+    output.innerHTML = years[slider.value]; // Display the default slider value
+
+    // Update the current slider value (each time you drag the slider handle)
+    var removed = cy.collection();
+
+    slider.oninput = function() {
+        var mile = this.value;
+        output.innerHTML = years[mile];
+
+        cy.startBatch();
+        removed.restore();
+        removed = cy.remove("[mile>" + mile + "]");
+        cy.$("").forEach(function( ele ) {
+            if (ele.data('node_name_' + mile) !== undefined) {
+                ele.data('node_name', ele.data('node_name_' + mile));
+            }
+            if (ele.data('node_roots_' + mile) !== undefined) {
+                ele.data('node_roots', ele.data('node_roots_' + mile));
+            }
+            if (ele.data('node_root_dates_' + mile) !== undefined) {
+                ele.data('node_root_dates', ele.data('node_root_dates_' + mile));
+            }
+            if (ele.data('node_fontsize_' + mile) !== undefined) {
+                ele.data('node_fontsize', ele.data('node_fontsize_' + mile));
+            }
+            if (ele.data('node_in_tips_' + mile) !== undefined) {
+                ele.data('node_in_tips', ele.data('node_in_tips_' + mile));
+            }
+            if (ele.data('node_in_ns_' + mile) !== undefined) {
+                ele.data('node_in_ns', ele.data('node_in_ns_' + mile));
+            }
+            if (ele.data('node_all_tips_' + mile) !== undefined) {
+                ele.data('node_all_tips', ele.data('node_all_tips_' + mile));
+            }
+            if (ele.data('node_size_' + mile) !== undefined) {
+                ele.data('node_size', ele.data('node_size_' + mile));
+            }
+            if (ele.data('edge_name_' + mile) !== undefined) {
+                ele.data('edge_name', ele.data('edge_name_' + mile));
+            }
+            if (ele.data('edge_size_' + mile) !== undefined) {
+                ele.data('edge_size', ele.data('edge_size_' + mile));
+            }
+            if (ele.data('node_meta_' + mile) !== undefined) {
+                ele.data('node_meta', ele.data('node_meta_' + mile));
+            } else if (ele.data('node_meta') !== undefined) {
+                ele.removeData('node_meta');
+            }
+        });
+        cy.endBatch();
+    }
+}
+
+function toggleFullScreen() {
+  var elem = document.getElementById("fullscreenDiv");
+  if ((document.fullScreenElement && document.fullScreenElement !== null) ||
+   (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+    if (elem.requestFullScreen) {
+      elem.requestFullScreen();
+    } else if (elem.mozRequestFullScreen) {
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullScreen) {
+      elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+    }
+    document.getElementById("fsspan").className = "glyphicon glyphicon-resize-small"
+    document.getElementById("fstext").innerHTML = "  Exit full screen"
+  } else {
+    if (document.cancelFullScreen) {
+      document.cancelFullScreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitCancelFullScreen) {
+      document.webkitCancelFullScreen();
+    }
+    document.getElementById("fsspan").className = "glyphicon glyphicon-fullscreen"
+    document.getElementById("fstext").innerHTML = "  Full screen"
+  }
+}</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+DATASET_COLORSTRIP
+
+SEPARATOR TAB
+BORDER_WIDTH	0.5
+MARGIN	5
+STRIP_WIDTH	25
+COLOR	#ffffff
+DATASET_LABEL	region
+
+LEGEND_COLORS	#d95f02	#1b9e77
+LEGEND_LABELS	Arequipa	Puno
+LEGEND_SHAPES	1	1
+LEGEND_TITLE	region
+
+DATA
+#NODE_ID COLOR LABEL_OR_STYLE
+root	#1b9e77	Puno
+1101787_meta-illumina	#1b9e77	Puno
+n0	#1b9e77	Puno
+1101786_meta-illumina	#1b9e77	Puno
+n00	#1b9e77	Puno
+1203037_meta-illumina	#1b9e77	Puno
+n11	#d95f02	Arequipa
+n44	#d95f02	Arequipa
+187_2022_aqp13	#d95f02	Arequipa
+167_2021_aqp13	#d95f02	Arequipa
+n2	#d95f02	Arequipa
+n5	#d95f02	Arequipa
+196_2021_aqp13	#d95f02	Arequipa
+71_2021_aqp12	#d95f02	Arequipa
+n22	#d95f02	Arequipa
+n33	#d95f02	Arequipa
+73_2021_aqp12	#d95f02	Arequipa
+n55	#d95f02	Arequipa
+n7	#d95f02	Arequipa
+172_2022_aqp14	#d95f02	Arequipa
+n3	#d95f02	Arequipa
+68_2021_aqp12	#d95f02	Arequipa
+n4	#d95f02	Arequipa
+52_2021_aqp12	#d95f02	Arequipa
+34_2021_aqp12	#d95f02	Arequipa
+147_2021_aqp12	#d95f02	Arequipa
+18_2021_aqp13	#d95f02	Arequipa
+n6	#d95f02	Arequipa
+56_2021_aqp14	#d95f02	Arequipa
+n77	#d95f02	Arequipa
+231_2021_aqp14	#d95f02	Arequipa
+n1111	#d95f02	Arequipa
+202_2021_aqp12	#d95f02	Arequipa
+107_2021_aqp12	#d95f02	Arequipa
+251_2021_aqp12	#d95f02	Arequipa
+250_2021_aqp12	#d95f02	Arequipa
+148_2021_aqp13	#d95f02	Arequipa
+40_2021_aqp14	#d95f02	Arequipa
+n66	#d95f02	Arequipa
+n8	#d95f02	Arequipa
+93_2021_aqp13	#d95f02	Arequipa
+9_2021_aqp13	#d95f02	Arequipa
+158_2022_aqp14	#d95f02	Arequipa
+126_2021_aqp14	#d95f02	Arequipa
+31_2021_aqp14	#d95f02	Arequipa
+174_2021_aqp13	#d95f02	Arequipa
+145_2022_aqp14	#d95f02	Arequipa
+n88	#d95f02	Arequipa
+n10	#d95f02	Arequipa
+12_2021_aqp13	#d95f02	Arequipa
+90_2021_aqp14	#d95f02	Arequipa
+236_2022_aqp12	#d95f02	Arequipa
+n9	#d95f02	Arequipa
+n1010	#d95f02	Arequipa
+30_2021_aqp14	#d95f02	Arequipa
+n99	#d95f02	Arequipa
+219_2022_aqp14	#d95f02	Arequipa
+92_2021_aqp13	#d95f02	Arequipa
+61_2021_aqp14	#d95f02	Arequipa
+173_2023_aqp14	#d95f02	Arequipa
+147_2022_aqp14	#d95f02	Arequipa

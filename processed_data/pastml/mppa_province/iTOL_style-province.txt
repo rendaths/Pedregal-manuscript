@@ -1,0 +1,74 @@
+DATASET_STYLE
+
+SEPARATOR TAB
+DATASET_LABEL	province (MPPA+F81)
+COLOR	#ffffff
+
+LEGEND_COLORS	#66c2a5	#fc8d62	#8da0cb	#e78ac3
+LEGEND_LABELS	Arequipa	Azangaro	Caylloma	Puno
+LEGEND_SHAPES	1	1	1	1
+LEGEND_TITLE	province (MPPA+F81)
+
+DATA
+#NODE_ID TYPE   NODE  COLOR SIZE_FACTOR LABEL_OR_STYLE
+root	branch	node	#fc8d62	2	normal
+1101787_meta-illumina	branch	node	#fc8d62	2	normal
+n0	branch	node	#fc8d62	2	normal
+1101786_meta-illumina	branch	node	#fc8d62	2	normal
+n00	branch	node	#fc8d62	2	normal
+1203037_meta-illumina	branch	node	#e78ac3	2	normal
+n11	branch	node	#8da0cb	2	normal
+n44	branch	node	#66c2a5	2	normal
+187_2022_aqp13	branch	node	#8da0cb	2	normal
+167_2021_aqp13	branch	node	#66c2a5	2	normal
+n2	branch	node	#8da0cb	2	normal
+n5	branch	node	#66c2a5	2	normal
+196_2021_aqp13	branch	node	#66c2a5	2	normal
+71_2021_aqp12	branch	node	#8da0cb	2	normal
+n22	branch	node	#8da0cb	2	normal
+n33	branch	node	#8da0cb	2	normal
+73_2021_aqp12	branch	node	#8da0cb	2	normal
+n55	branch	node	#66c2a5	2	normal
+n7	branch	node	#66c2a5	2	normal
+172_2022_aqp14	branch	node	#66c2a5	2	normal
+n3	branch	node	#8da0cb	2	normal
+68_2021_aqp12	branch	node	#8da0cb	2	normal
+n4	branch	node	#8da0cb	2	normal
+52_2021_aqp12	branch	node	#8da0cb	2	normal
+34_2021_aqp12	branch	node	#8da0cb	2	normal
+147_2021_aqp12	branch	node	#8da0cb	2	normal
+18_2021_aqp13	branch	node	#66c2a5	2	normal
+n6	branch	node	#66c2a5	2	normal
+56_2021_aqp14	branch	node	#66c2a5	2	normal
+n77	branch	node	#66c2a5	2	normal
+231_2021_aqp14	branch	node	#66c2a5	2	normal
+n1111	branch	node	#66c2a5	2	normal
+202_2021_aqp12	branch	node	#8da0cb	2	normal
+107_2021_aqp12	branch	node	#8da0cb	2	normal
+251_2021_aqp12	branch	node	#8da0cb	2	normal
+250_2021_aqp12	branch	node	#8da0cb	2	normal
+148_2021_aqp13	branch	node	#66c2a5	2	normal
+40_2021_aqp14	branch	node	#66c2a5	2	normal
+n66	branch	node	#66c2a5	2	normal
+n8	branch	node	#66c2a5	2	normal
+93_2021_aqp13	branch	node	#66c2a5	2	normal
+9_2021_aqp13	branch	node	#66c2a5	2	normal
+158_2022_aqp14	branch	node	#66c2a5	2	normal
+126_2021_aqp14	branch	node	#66c2a5	2	normal
+31_2021_aqp14	branch	node	#66c2a5	2	normal
+174_2021_aqp13	branch	node	#66c2a5	2	normal
+145_2022_aqp14	branch	node	#66c2a5	2	normal
+n88	branch	node	#66c2a5	2	normal
+n10	branch	node	#66c2a5	2	normal
+12_2021_aqp13	branch	node	#66c2a5	2	normal
+90_2021_aqp14	branch	node	#66c2a5	2	normal
+236_2022_aqp12	branch	node	#8da0cb	2	normal
+n9	branch	node	#66c2a5	2	normal
+n1010	branch	node	#66c2a5	2	normal
+30_2021_aqp14	branch	node	#66c2a5	2	normal
+n99	branch	node	#66c2a5	2	normal
+219_2022_aqp14	branch	node	#66c2a5	2	normal
+92_2021_aqp13	branch	node	#66c2a5	2	normal
+61_2021_aqp14	branch	node	#66c2a5	2	normal
+173_2023_aqp14	branch	node	#66c2a5	2	normal
+147_2022_aqp14	branch	node	#66c2a5	2	normal

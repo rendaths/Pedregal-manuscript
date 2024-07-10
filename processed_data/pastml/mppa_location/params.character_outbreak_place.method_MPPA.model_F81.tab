@@ -1,0 +1,21 @@
+parameter	value
+pastml_version	1.9.43
+character	outbreak_place
+log_likelihood	-11.942056753370439
+log_likelihood_restricted_JOINT	-12.620372187810373
+log_likelihood_restricted_MAP	-12.620372187810373
+log_likelihood_restricted_MPPA	-11.942644498723174
+num_scenarios	3
+num_states_per_node_avg	1.032258064516129
+num_unresolved_nodes	1
+percentage_of_unresolved_nodes	1.6129032258064515
+method	MPPA
+model	F81
+num_nodes	62
+num_tips	38
+scaling_factor	0.11604815873465163
+state_changes_per_avg_branch	0.10882001269964003
+smoothing_factor	0
+Arequipa	0.5110042691503074
+El Pedregal	0.32940343345127665
+Puno	0.15959229739841604
