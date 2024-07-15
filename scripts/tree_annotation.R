@@ -18,6 +18,8 @@ library(patchwork)
 library(readr)
 library(lubridate)
 library(BactDating)
+library(adephylo)
+
 
 ## DATA#################
 ### trees
@@ -49,7 +51,7 @@ final=gplot+
   #geom_tiplab(aes(label=display), size=2.5)+
 #  geom_label2(aes(label=label, subset = !is.na(as.numeric(label)) & as.numeric(label) > 0.8))+
   geom_nodepoint(color="darkgray", shape=18, alpha=1, size=3 , aes(subset=as.numeric(label) >0.8))+
-  geom_treescale(x=30, y=25, label="~SNPs",offset.label=-1, offset=1)+
+  geom_treescale(x=90, y=4, label="~SNPs",offset.label=-1, offset=1)+
 geom_tippoint(mapping=aes(col=outbreak_place, shape=outbreak_place, size=outbreak_place))+
   scale_color_manual(name="Location",values=wes_palette("FantasticFox1", 3, type = "discrete"),
                     labels =sort(unique(rooted.meta$outbreak_place)))+
@@ -67,15 +69,16 @@ geom_tippoint(mapping=aes(col=outbreak_place, shape=outbreak_place, size=outbrea
   # scale_fill_manual(name = "Seq run",values=wes_palette("Zissou1", 6, type = "continuous"),labels =sort(unique(rooted.meta$run_id)),na.translate=FALSE)+
   theme(legend.position = "bottom",legend.text=element_text(size=12),legend.title=element_text(size=12));final
 
-tiff("figures/fig3.tif", units = "in", width=11.69, height=8.27, res= 300, compression = "lzw")
-final
-dev.off()
-
-pdf("figures/fig3.pdf", width=11.69, height=8.27)
-final
-dev.off()
-width=5, height=17.5, units="in", res=100
-
-jpeg("figures/fig3.jpg", quality=500, width=11.69, height=8.27, units="in", res=200)
-final
-dev.off()
+  
+# 
+# tiff("figures/fig3.tif", units = "in", width=11.69, height=8.27, res= 300, compression = "lzw")
+# final
+# dev.off()
+# 
+# pdf("figures/fig3.pdf", width=11.69, height=8.27)
+# final
+# dev.off()
+# 
+# jpeg("figures/fig3.jpg", quality=500, width=11.69, height=8.27, units="in", res=200)
+# final
+# dev.off()

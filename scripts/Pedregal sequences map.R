@@ -25,6 +25,7 @@
   library(rnaturalearth)
   library(rnaturalearthdata)
   library(cowplot)
+  library(ggrepel)
   library(tidyverse)
 
 
@@ -51,7 +52,7 @@
 # join data by year
   CASOSPED <- bind_rows(CASOS2021,CASOS2022) 
   
-  CASOSPED <- dplyr::select(CASOSPED,ident,long,lat,Year,Sequenced)
+  CASOSPED <- dplyr::select(CASOSPED,ident,long,lat,Year,Sequenced,Cases_ID)
   CASOSPED <- na.omit(CASOSPED)
   CASOSPED$ident <- gsub("Caso0","",CASOSPED$ident)
   CASOSPED <- CASOSPED %>%st_as_sf(coords = c("long", "lat"), crs = 4326)
@@ -84,9 +85,16 @@
   PEDMAN<-rbind(PEDURB,PED)
   PEDMAN$zone<-as.factor(PEDMAN$zone)
 
+  
 # Figure
-  ggplot() + 
+  cases=ggplot() + 
   geom_sf(data = PEDMAN, color = "white",size=0.1,aes(fill=zone) )+ 
+    scale_fill_manual("Type of zone",
+                      values = c("#fddbc7","#d1e5f0"),
+                      breaks = c("Rural","Urban"),
+                      labels = c("Agricultural lots","City blocks")) +
+    guides(fill = guide_legend(order = 1))+
+    new_scale_fill()+
   theme_minimal() +
     theme( axis.line = element_blank(),
       axis.text = element_blank(),
@@ -97,9 +105,14 @@
       panel.border = element_rect(color = "black", fill = NA),
       panel.grid.major = element_blank(),  # Remove major gridlines
       panel.grid.minor = element_blank())  + # Remove minor gridlines) 
-  geom_sf(data = CASOSPED, aes( color=Sequenced, shape= Year), size = 4,alpha=0.85)+
+ # geom_sf(data = CASOSPED, aes( color=Sequenced, shape= Year), size = 4,alpha=0.85)+
     # add case identifiers
-    geom_sf_text(data = CASOSPED, aes(label = ident), size = 3, color = "black", check_overlap = TRUE, fontface="bold") +
+    geom_label_repel(data = CASOSPED, aes(label = Cases_ID, geometry = geometry, fill=Year, col=Sequenced), size = 4, fontface = "bold", stat = "sf_coordinates")+
+    scale_fill_manual("Year",
+                      values = c("light grey","white")) +
+    scale_color_manual("Sequenced", values = c("#f21f1f","#0f0000"))+
+    new_scale_fill()+
+     # geom_sf_text(data = CASOSPED, aes(label = Cases_ID), size = 4, color = "black", check_overlap = F, fontface="bold") +
     annotation_scale(location = "br", height = unit(0.4, "cm"),
                      pad_x = unit(1, "cm"),pad_y = unit(0.8, "cm")) +
     annotation_north_arrow(location = "br", which_north = "true", 
@@ -107,18 +120,8 @@
                            height = unit(1.4, "cm"),
                            width = unit(1.4, "cm"),
                            pad_x = unit(1.60, "cm"), pad_y = unit(2.00, "cm"))+
-    coord_sf(xlim = c(-72.11, -72.33), ylim = c(-16.25, -16.465), expand = FALSE)+
-    scale_fill_manual("Type of zone",
-                      values = c("#fddbc7","#d1e5f0"),
-                      breaks = c("Rural","Urban"),
-                      labels = c("Rural","Urban")) +
-    scale_color_manual("Sequenced", values = c("#0f0000","#f21f1f"))+
-                     
-    scale_shape_manual("Year", values = c( 2, 3))+
-  
-    guides(fill = guide_legend(order = 2))
-  
+    coord_sf(xlim = c(-72.11, -72.33), ylim = c(-16.25, -16.465), expand = FALSE); cases
 
-  
+    
 
 

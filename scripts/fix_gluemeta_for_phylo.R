@@ -1,7 +1,7 @@
 ## fix metadata for phylo plots and associate map
 
 ## metadata
-annot=read.table("data/sequence_data/glue/glue_LAC_bol_peru34_dogRABV_metadata.txt", sep="\t", header=T)
+annot=read.table("raw_data/sequence_data/glue/glue_LAC_bol_peru34_dogRABV_metadata.txt", sep="\t", header=T)
 ## tidy clade names
 annot$alignment.displayName[annot$alignment.displayName=="Rabies Virus (RABV)"]="Unknown"
 annot$alignment.displayName=gsub(" ",":",annot$alignment.displayName)
