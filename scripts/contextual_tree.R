@@ -15,10 +15,11 @@ library(viridis)
 library(ggnewscale)
 library(patchwork)
 library(pals)
+library(ggplotify)
 library(ggstar)
 
 
-tree=read.newick("processed/trees/glue_bol_and_peru.nwk")
+tree=read.newick("processed_data//trees/glue_bol_and_peru.nwk")
 
 ## metadata
 source("scripts/fix_gluemeta_for_phylo.R")
@@ -27,13 +28,13 @@ source("scripts/fix_gluemeta_for_phylo.R")
 # tree plots:  aesthetics, ladderize
 root_tree=root(tree, "KF154998.1")
 root_tree=drop.tip(root_tree, "KF154998.1")
-which(!root_tree$tip.label %in% annot$sequence.sequenceID)
+#which(!root_tree$tip.label %in% annot$sequence.sequenceID)
 gplot <- ggtree(root_tree,ladderize = TRUE, size=0.2, col="darkgrey") %<+% annot
 
 ##Peru relevant mrcas
 #plot(tree_plot) + geom_text(aes(label=node), hjust=.3, size=0.6)
 mrca=MRCA(root_tree, annot$sequence.sequenceID[annot$Study=="This study"])
-viewClade(tree_plot, mrca)
+#viewClade(tree_plot, mrca)
 mrca2=1433 # for all peruvian seq in that section of tree
 
 # highlight the romblon cases 
@@ -74,6 +75,8 @@ geom_fruit(geom=geom_tile, mapping=aes(fill=alignment.displayName), width=0.02)+
   theme(legend.position="top", legend.box = "vertical",legend.margin = margin(0, 0, 0, 0)) + 
   theme(plot.margin = unit(c(1, 1, 1, 1), "lines"))+
   theme(legend.key.size = unit(0.4, "cm"))+
+  geom_cladelabel(node=mrca2, label="Cosmo:Am5", 
+                  color="black")+
   guides(fill = guide_legend(ncol = 3, order=3, title.position ="top")); tree_plot
 
 leg <- as.ggplot(ggpubr::get_legend(tree_plot), position="top")+

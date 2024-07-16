@@ -107,7 +107,7 @@
       panel.grid.minor = element_blank())  + # Remove minor gridlines) 
  # geom_sf(data = CASOSPED, aes( color=Sequenced, shape= Year), size = 4,alpha=0.85)+
     # add case identifiers
-    geom_label_repel(data = CASOSPED, aes(label = Cases_ID, geometry = geometry, fill=Year, col=Sequenced), size = 4, fontface = "bold", stat = "sf_coordinates")+
+    geom_label_repel(data = CASOSPED, aes(label = Cases_ID, geometry = geometry, fill=Year, col=Sequenced), size = 4, fontface = "bold", stat = "sf_coordinates", max.overlaps = 11)+
     scale_fill_manual("Year",
                       values = c("light grey","white")) +
     scale_color_manual("Sequenced", values = c("#f21f1f","#0f0000"))+

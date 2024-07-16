@@ -8,15 +8,15 @@ source("scripts/Pedregal sequences map.R")
 (peru_inlac|cases)+ plot_annotation(tag_levels = 'A')
 
 
-tiff("figures/fig1.tif", units = "in", width=11.69, height=8.27, res= 300, compression = "lzw")
+tiff("figures/fig1.tif", units = "in", width=11.69, height=9, res= 300, compression = "lzw")
 (peru_inlac|cases)+ plot_annotation(tag_levels = 'A')
 dev.off()
 
-pdf("figures/fig1.pdf", width=11.69, height=8.27)
+pdf("figures/fig1.pdf", width=11.69, height=9)
 (peru_inlac|cases)+ plot_annotation(tag_levels = 'A')
 dev.off()
 
-jpeg("figures/fig1.jpg", quality=500, width=11.69, height=8.27, units="in", res=200)
+jpeg("figures/fig1.jpg", quality=500, width=11.69, height=9, units="in", res=200)
 (peru_inlac|cases)+ plot_annotation(tag_levels = 'A')
 dev.off()
 
